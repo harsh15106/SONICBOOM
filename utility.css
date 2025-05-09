@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+.flex {display: flex;}
+.align {align-items: center;}
+.justify {justify-content: center;}
+.justifyS {justify-content: start;}
+.border {border: 2px solid red;}
+.m1 {margin: 2px;}
+.m2 {margin: 5px;}
+.m3 {margin: 10px;}
+.p1 {padding: 5px;}
+.p2{ padding: 7px;}
+.p3{padding: 10px;}
+
+.f1 {
+    font-family: "Oswald";
+    font-weight: 500;
+}
+
+.f2 {
+    font-family: "Oswald";
+    font-weight: 600;
+}
+
+.f3{
+    font-family: "Oswald";
+    font-weight: 400;
+}
+
+.c1 {color: white;}
+.c2 {color: #5D001E;}
+.br1 {border-radius: 15px;}
+.rel {position: relative;}
+.cursor{cursor: pointer;}
+
+::-webkit-scrollbar{
+    width: 12px;
+    background-color: #90AEAD;
+    border-radius: 6px;
+}
+::-webkit-scrollbar-track{
+    border-radius: 5px;
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb{
+    border-radius: 5px;
+    background-color: #5D001E;
+    border: 1px solid white;
+}
