@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
-:root{
-    --a:0;
+
+:root {
+    --a: 0;
 }
+
 body {
     background-color: #000000;
 }
@@ -17,20 +19,11 @@ body {
     z-index: 20;
 }
 
-.nav .navitems ul {
-    list-style-type: none;
-    gap: 2rem;
-    position: absolute;
-    top: -1vh;
-    left: 70%;
-
-}
-
 .nav h1 {
     width: 10px;
     position: absolute;
     top: -2.5vh;
-    left: 10rem;
+    left: 47vw;
     letter-spacing: 0.1rem;
 }
 
@@ -50,27 +43,31 @@ body {
     margin: 5px;
     padding: 5px;
 }
-.cardlist{
+
+.cardlist {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
 }
+
 .card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius:10px ;
+    border-radius: 10px;
     width: 181px;
     position: relative;
     transition: all 0.9s;
     background-color: #6a4940;
-    border:2px solid #6a4940
+    border: 2px solid #6a4940
 }
-.card:hover{
+
+.card:hover {
     background-color: #5D001E;
     border: 2px solid #683B30;
-    --a:1;
+    --a: 1;
 }
+
 .card img {
     width: 90%;
     object-fit: contain;
@@ -200,11 +197,11 @@ body {
     align-items: center;
 }
 
-.range input{
+.range input {
     cursor: pointer;
 }
 
-.range{
+.range {
     color: #1B353F;
 }
 
@@ -259,7 +256,7 @@ body {
         width: 25px;
     }
 
-    .volume{
+    .volume {
         flex-direction: column;
         gap: 0px;
     }
@@ -294,7 +291,8 @@ body {
         width: 100%;
     }
 }
-@media ((max-width: 490px)){
+
+@media ((max-width: 490px)) {
     .seekbar {
         top: -1px;
         width: 96%;
