@@ -29,7 +29,7 @@ async function getSongs(folder) {
         ul.innerHTML += `
             <li>
                 <img src="ASSETS/IMAGES/music.svg" alt="">
-                <div class="info"><div>${song.replaceAll("%20", " ")}</div></div>
+                <div class="info"><div>${song.replaceAll("%20", " ").replace(".mp3", "")}</div></div>
                 <div class="playnow"><span>Play Now</span><img src="/ASSETS/IMAGES/play2.svg"></div>
             </li>`;
     });
@@ -47,7 +47,8 @@ function playMusic(track, pause = false) {
         currentSong.play();
         document.getElementById("play").src = "/ASSETS/IMAGES/pause.svg";
     }
-    document.querySelector(".songinfo").innerText = decodeURI(track);
+    const displayName = decodeURIComponent(track).replace(".mp3", "").replaceAll("%20", " ");
+    document.querySelector(".songinfo").innerText = displayName;
     document.querySelector(".songtime").innerText = "00:00/00:00";
 }
 
@@ -87,6 +88,25 @@ async function displayAlbums() {
     });
 }
 
+function getCurrentSongIndex() {
+    const currentFile = decodeURIComponent(currentSong.src.split("/").pop());
+    return songs.indexOf(currentFile);
+}
+
+function playNext() {
+    const index = getCurrentSongIndex();
+    if (index !== -1 && index < songs.length - 1) {
+        playMusic(songs[index + 1]);
+    }
+}
+
+function playPrevious() {
+    const index = getCurrentSongIndex();
+    if (index > 0) {
+        playMusic(songs[index - 1]);
+    }
+}
+
 async function main() {
     const playBtn = document.getElementById("play");
     const back = document.getElementById("back");
@@ -111,6 +131,8 @@ async function main() {
         document.querySelector(".circle").style.left = (currentSong.currentTime / currentSong.duration) * 100 + "%";
     });
 
+    currentSong.addEventListener("ended", playNext); // 🔁 Autoplay next song
+
     document.querySelector(".seekbar").addEventListener("click", e => {
         let percent = e.offsetX / e.target.clientWidth;
         currentSong.currentTime = percent * currentSong.duration;
@@ -121,21 +143,15 @@ async function main() {
         left.style.left = left.style.left === "0%" ? "-100%" : "0%";
     });
 
-    back.addEventListener("click", () => {
-        let index = songs.indexOf(currentSong.src.split("/").pop());
-        if (index > 0) playMusic(songs[index - 1]);
-    });
-
-    next.addEventListener("click", () => {
-        let index = songs.indexOf(currentSong.src.split("/").pop());
-        if (index < songs.length - 1) playMusic(songs[index + 1]);
-    });
+    back.addEventListener("click", playPrevious);
+    next.addEventListener("click", playNext);
 
     const volSlider = document.querySelector(".range input");
     volSlider.addEventListener("input", e => {
         currentSong.volume = parseInt(e.target.value) / 100;
     });
     volSlider.value = 30;
+    currentSong.volume = 0.3;
 
     document.querySelector(".volume img").addEventListener("click", (e) => {
         const img = e.target;
@@ -145,8 +161,8 @@ async function main() {
             volSlider.value = 0;
         } else {
             img.src = img.src.replace("mute.svg", "vol.svg");
-            currentSong.volume = 0.1;
-            volSlider.value = 10;
+            currentSong.volume = 0.3;
+            volSlider.value = 30;
         }
     });
 }
